@@ -20,10 +20,10 @@ class Settings(BaseSettings):
     qdrant_prefetch_limit: int = 25
 
     # Models
-    dense_model_name: str = ("sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
-    dense_model_max_tokens: int = 768
+    dense_model_name: str = ("sentence-transformers/all-MiniLM-L6-v2")
+    dense_model_max_tokens: int = 384
     bm25_model_name: str = "Qdrant/bm25"
-    late_interaction_model_name: str = "colbert-ir/colbertv2.0"
+    late_interaction_model_name: str = "colbert-ir/colbertv2.0-mini"
 
     # Postgres Supabase
     postgres_user: str = os.getenv('POSTGRES_USER')
