@@ -1,0 +1,14 @@
+streamlit
+requests
+pandas
+python-dotenv
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+qdrant-client
+openai
+pydantic
+pydantic-settings
+fastembed
+transformers
