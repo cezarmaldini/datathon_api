@@ -10,5 +10,5 @@ qdrant-client
 openai
 pydantic
 pydantic-settings
-fastembed
+fastembed==0.5.1
 transformers

@@ -2,7 +2,7 @@ import requests
 import json
 from datetime import date
 
-url = "http://localhost:8001/vagas/"
+url = "https://datathon-api-ljhdg.ondigitalocean.app/vagas/"
 
 vaga = {
     "data_requisicao": str(date.today()),
