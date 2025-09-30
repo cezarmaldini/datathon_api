@@ -18,7 +18,13 @@ class QdrantRetriever:
     def search_documents(
         self, collection_name: str, embeddings: QueryEmbeddings, limit: int = 5
     ) -> List[Document]:
+        # 🔧 LOG INICIAL
+        logger.info(f"🔍 INICIANDO BUSCA - Coleção: {collection_name}, Limit: {limit}")
+        
         try:
+            # 🔧 LOG ANTES DA CONSULTA
+            logger.info(f"🎯 Executando query_points no Qdrant...")
+            
             # Search using all vector types
             search_result = self.client.query_points(
                 collection_name=collection_name,
@@ -42,6 +48,9 @@ class QdrantRetriever:
                 limit=limit,
             )
 
+            # 🔧 LOG APÓS CONSULTA BEM-SUCEDIDA
+            logger.info(f"✅ BUSCA CONCLUÍDA - {len(search_result.points)} documentos encontrados")
+
             # Convert results to Document objects
             return [
                 Document(
@@ -52,6 +61,10 @@ class QdrantRetriever:
             ]
 
         except UnexpectedResponse as e:
+            # 🔧 LOG DE ERRO QDRANT
+            logger.error(f"💥 ERRO QDRANT - Status: {e.status_code}, Mensagem: {e.content}")
+            logger.error(f"📋 Detalhes: {str(e)}")
+            
             # Handle Qdrant-specific errors
             logger.error(
                 "Qdrant search failed",
@@ -61,6 +74,12 @@ class QdrantRetriever:
                 status_code=503, detail="Search service temporarily unavailable"
             )
         except Exception as e:
+            # 🔧 LOG DE ERRO GENÉRICO
+            logger.error(f"💥 ERRO INESPERADO - Tipo: {type(e).__name__}")
+            logger.error(f"📋 Mensagem: {str(e)}")
+            import traceback
+            logger.error(f"🔍 Stack Trace: {traceback.format_exc()}")
+            
             # Handle any other errors
             logger.error(
                 "Unexpected error during search",
