@@ -55,7 +55,7 @@ class QdrantRetriever:
             # Handle Qdrant-specific errors
             logger.error(
                 "Qdrant search failed",
-                extra={"error": str(e), "collection": self.collection_name},
+                extra={"error": str(e), "collection": collection_name},
             )
             raise HTTPException(
                 status_code=503, detail="Search service temporarily unavailable"
@@ -64,6 +64,6 @@ class QdrantRetriever:
             # Handle any other errors
             logger.error(
                 "Unexpected error during search",
-                extra={"error": str(e), "collection": self.collection_name},
+                extra={"error": str(e), "collection": collection_name},
             )
             raise HTTPException(status_code=500, detail="Internal server error")
